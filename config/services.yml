@@ -1,0 +1,9 @@
+parameters:
+  locale_manager.class: Heystack\LocationDetection\LocaleManager
+
+services:
+  location_manager:
+    class: %locale_manager.class%
+    tags:
+      - { name: autoinject.provides }
+      - { name: autoinject }

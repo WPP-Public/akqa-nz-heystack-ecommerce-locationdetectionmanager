@@ -1,0 +1,15 @@
+{
+    "name": "heystack/ecommerce-locationdetectionmanager",
+    "type": "silverstripe-module",
+    "require": {
+        "php": ">=5.4.0",
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Heystack\\LocationDetection\\": "src/"
+        }
+    }
+}

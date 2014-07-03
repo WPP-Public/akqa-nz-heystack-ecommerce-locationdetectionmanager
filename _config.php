@@ -1,0 +1,3 @@
+<?php
+
+define('ECOMMERCE_LOCATION_DETECTION_BASE_PATH', __DIR__);
