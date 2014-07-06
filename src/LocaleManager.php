@@ -6,6 +6,7 @@ use Heystack\Core\Identifier\Identifier;
 use Heystack\Core\Identifier\IdentifierInterface;
 use Heystack\Core\State\State;
 use Heystack\Core\Traits\HasStateServiceTrait;
+use Heystack\Core\ViewableData\ViewableDataInterface;
 use Heystack\Ecommerce\Currency\Interfaces\CurrencyInterface;
 use Heystack\Ecommerce\Currency\Interfaces\CurrencyServiceInterface;
 use Heystack\Ecommerce\Currency\Traits\HasCurrencyServiceTrait;
@@ -73,10 +74,13 @@ class LocaleManager
     public function configureEnvironmentFromRequest(\SS_HTTPRequest $request)
     {
         if ($this->hasLocaleCookie()) {
-            $this->configureEnvironmentFromCountry(
+            $success = $this->configureEnvironmentFromCountry(
                 new Identifier($this->getLocaleCookie())
             );
-            return;
+            
+            if ($success) {
+                return;
+            }
         }
         
         $country = $this->localeDetector->getCountryForRequest($request);

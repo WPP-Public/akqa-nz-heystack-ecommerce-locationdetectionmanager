@@ -27,15 +27,17 @@ class SetCountryInputProcessor implements ProcessorInterface
      */
     public function process(\SS_HTTPRequest $request)
     {
-        if (!$countyCode = $request->param('ID')) {
-            return false;
+        if ($countyCode = $request->param('ID')) {
+            $country = new Identifier($countyCode);
+        } else {
+            $country = $this->localeService->getActiveCountry()->getIdentifier();
         }
         
         if (!$this->localeManager->getAllowUserOverride()) {
             return false;
         }
         
-        $success = $this->localeManager->configureEnvironmentFromCountry(new Identifier($countyCode));
+        $success = $this->localeManager->configureEnvironmentFromCountry($country);
         
         $this->localeManager->setAllowUserOverride(false);
         

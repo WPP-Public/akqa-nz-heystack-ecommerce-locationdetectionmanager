@@ -17,11 +17,13 @@ class ContainerConfig implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('location_detection');
+        $rootNode = $treeBuilder->root('locale_detection');
         
         $rootNode
             ->children()
-                ->scalarNode('location_detector')->isRequired()->end()
+                ->scalarNode('locale_detector')->isRequired()->end()
+                ->scalarNode('cookie_name')->end()
+                ->scalarNode('cookie_expiry')->end()
             ->end();
 
         return $treeBuilder;

@@ -38,11 +38,18 @@ class ContainerExtension extends Extension
             $configs
         );
         
-        $def = $container->getDefinition('location_manager');
+        $def = $container->getDefinition('locale_manager');
         
         $args = $def->getArguments();
-        $args[2] = new Reference($config['location_detector']);
+        $args[2] = new Reference($config['locale_detector']);
         $def->setArguments($args);
+        
+        if (isset($config['cookie_name'])) {
+            $def->addMethodCall('setCookieName', [$config['cookie_name']]);
+        }
+        if (isset($config['cookie_expiry'])) {
+            $def->addMethodCall('setCookieExpiry', [$config['cookie_expiry']]);
+        }
     }
 
     /**
@@ -54,7 +61,7 @@ class ContainerExtension extends Extension
      */
     public function getNamespace()
     {
-        return 'location_detection';
+        return 'locale_detection';
     }
 
     /**
@@ -80,6 +87,6 @@ class ContainerExtension extends Extension
      */
     public function getAlias()
     {
-        return 'location_detection';
+        return 'locale_detection';
     }
 }

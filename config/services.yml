@@ -1,9 +1,20 @@
 parameters:
   locale_manager.class: Heystack\LocationDetection\LocaleManager
+  set_country_input_processor.class: Heystack\LocationDetection\SetCountryInputProcessor
+  set_country_output_processor.class: Heystack\LocationDetection\SetCountryOutputProcessor
 
 services:
-  location_manager:
+  locale_manager:
     class: %locale_manager.class%
     tags:
       - { name: autoinject.provides }
       - { name: autoinject }
+  set_country_input_processor:
+    class: %set_country_input_processor.class%
+    tags:
+      - { name: autoinject.provides }
+      - { name: autoinject }
+  set_country_output_processor:
+    class: %set_country_output_processor.class%
+    tags:
+      - { name: autoinject.provides }
